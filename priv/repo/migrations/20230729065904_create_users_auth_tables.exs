@@ -6,6 +6,7 @@ defmodule UniversityVotingSystem.Repo.Migrations.CreateUsersAuthTables do
       add :email, :string, null: false, size: 160
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
+      add :positions_voted_for, {:map, :integer}, default: %{}
       timestamps()
     end
 

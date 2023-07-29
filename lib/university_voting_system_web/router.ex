@@ -34,6 +34,13 @@ defmodule UniversityVotingSystemWeb.Router do
 
     live "/contestants/:id", ContestantLive.Show, :show
     live "/contestants/:id/show/edit", ContestantLive.Show, :edit
+
+    live "/votes", VoteLive.Index, :index
+    live "/votes/new", VoteLive.Index, :new
+    live "/votes/:id/edit", VoteLive.Index, :edit
+
+    live "/votes/:id", VoteLive.Show, :show
+    live "/votes/:id/show/edit", VoteLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

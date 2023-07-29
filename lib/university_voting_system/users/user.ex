@@ -7,6 +7,7 @@ defmodule UniversityVotingSystem.Users.User do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+    field :positions_voted_for, {:map, :integer}, default: %{}
 
     timestamps()
   end
@@ -30,7 +31,7 @@ defmodule UniversityVotingSystem.Users.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :positions_voted_for])
     |> validate_email()
     |> validate_password(opts)
   end
@@ -117,7 +118,10 @@ defmodule UniversityVotingSystem.Users.User do
   If there is no user or the user doesn't have a password, we call
   `Bcrypt.no_user_verify/0` to avoid timing attacks.
   """
-  def valid_password?(%UniversityVotingSystem.Users.User{hashed_password: hashed_password}, password)
+  def valid_password?(
+        %UniversityVotingSystem.Users.User{hashed_password: hashed_password},
+        password
+      )
       when is_binary(hashed_password) and byte_size(password) > 0 do
     Bcrypt.verify_pass(password, hashed_password)
   end
