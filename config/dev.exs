@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :university_voting_system, UniversityVotingSystem.Repo,
   username: "root",
-  password: "",
+  password: "Michael@11",
   hostname: "localhost",
   database: "university_voting_system_dev",
   stacktrace: true,
