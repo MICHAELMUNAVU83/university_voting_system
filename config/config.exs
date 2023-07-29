@@ -13,9 +13,24 @@ config :university_voting_system,
 # Configures the endpoint
 config :university_voting_system, UniversityVotingSystemWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: UniversityVotingSystemWeb.ErrorView, accepts: ~w(html json), layout: false],
+  render_errors: [
+    view: UniversityVotingSystemWeb.ErrorView,
+    accepts: ~w(html json),
+    layout: false
+  ],
   pubsub_server: UniversityVotingSystem.PubSub,
   live_view: [signing_salt: "Yk/YzbFO"]
+
+config :tailwind,
+  version: "3.3.3",
+  default: [
+    args: ~w(
+      --config=tailwind.config.js
+      --input=css/app.css
+      --output=../priv/static/assets/app.css
+    ),
+    cd: Path.expand("../assets", __DIR__)
+  ]
 
 # Configures the mailer
 #

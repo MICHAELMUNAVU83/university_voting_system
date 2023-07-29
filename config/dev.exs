@@ -26,7 +26,9 @@ config :university_voting_system, UniversityVotingSystemWeb.Endpoint,
   secret_key_base: "XT+UiJ7/HSc069VQP5uWTcIIevDkBSVY7GvtnivZN3mUsLL+HMk/4Rwucl2EKQ96",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
+
   ]
 
 # ## SSL Support
