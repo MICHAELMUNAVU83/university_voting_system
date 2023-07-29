@@ -1,0 +1,31 @@
+<h1>Show Position</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.position_show_path(@socket, :show, @position)}>
+    <.live_component
+      module={UniversityVotingSystemWeb.PositionLive.FormComponent}
+      id={@position.id}
+      title={@page_title}
+      action={@live_action}
+      position={@position}
+      return_to={Routes.position_show_path(@socket, :show, @position)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @position.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @position.description %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.position_show_path(@socket, :edit, @position), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.position_index_path(@socket, :index) %></span>

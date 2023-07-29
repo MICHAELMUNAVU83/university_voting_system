@@ -1,0 +1,26 @@
+<h1>Show Contestant</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.contestant_show_path(@socket, :show, @contestant)}>
+    <.live_component
+      module={UniversityVotingSystemWeb.ContestantLive.FormComponent}
+      id={@contestant.id}
+      title={@page_title}
+      action={@live_action}
+      contestant={@contestant}
+      return_to={Routes.contestant_show_path(@socket, :show, @contestant)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @contestant.name %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.contestant_show_path(@socket, :edit, @contestant), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.contestant_index_path(@socket, :index) %></span>

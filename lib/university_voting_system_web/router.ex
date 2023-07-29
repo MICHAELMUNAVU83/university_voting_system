@@ -21,6 +21,19 @@ defmodule UniversityVotingSystemWeb.Router do
     pipe_through :browser
 
     live "/", PageLive.Index, :index
+    live "/positions", PositionLive.Index, :index
+    live "/positions/new", PositionLive.Index, :new
+    live "/positions/:id/edit", PositionLive.Index, :edit
+
+    live "/positions/:id", PositionLive.Show, :show
+    live "/positions/:id/show/edit", PositionLive.Show, :edit
+
+    live "/contestants", ContestantLive.Index, :index
+    live "/contestants/new", ContestantLive.Index, :new
+    live "/contestants/:id/edit", ContestantLive.Index, :edit
+
+    live "/contestants/:id", ContestantLive.Show, :show
+    live "/contestants/:id/show/edit", ContestantLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
