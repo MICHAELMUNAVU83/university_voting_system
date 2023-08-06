@@ -1,0 +1,17 @@
+<div class="flex flex-col gap-2">
+  Positions you can sign up for
+  <%= if @current_user_already_contested == true do %>
+    You have already signed up for a <%= @position_user_has_contested_for %>
+  <% end %>
+  <%= for position <- @positions do %>
+    <div class="bg-red-500">
+      <%= position.name %>
+
+      <%= if @current_user_already_contested == false do %>
+        <%= link  to: "#", phx_click: "add_a_contestant", phx_value_id: position.id, data: [confirm: "Are you sure?"] do %>
+          Add me as a contestant
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

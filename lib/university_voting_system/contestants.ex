@@ -21,6 +21,14 @@ defmodule UniversityVotingSystem.Contestants do
     Repo.all(Contestant)
   end
 
+  def get_positions_user_has_contested_for(user_id) do
+    from(c in Contestant,
+      where: c.user_id == ^user_id
+    )
+    |> Repo.one()
+    |> Repo.preload(:position)
+  end
+
   @doc """
   Gets a single contestant.
 

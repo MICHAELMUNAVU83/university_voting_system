@@ -21,6 +21,7 @@ defmodule UniversityVotingSystemWeb.Router do
     pipe_through :browser
 
     live "/", PageLive.Index, :index
+    live "/register_contestant", RegisterContestantLive.Index, :index
     live "/positions", PositionLive.Index, :index
     live "/positions/new", PositionLive.Index, :new
     live "/positions/:id/edit", PositionLive.Index, :edit
