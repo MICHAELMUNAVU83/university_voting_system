@@ -26,6 +26,13 @@ defmodule UniversityVotingSystem.Users do
     Repo.get_by(User, email: email)
   end
 
+  def get_user_email(id) do
+    Repo.all(User)
+    |> Enum.filter(fn user -> user.id == id end)
+    |> Enum.map(fn user -> user.email end)
+    |> Enum.at(0)
+  end
+
   @doc """
   Gets a user by email and password.
 
@@ -42,6 +49,22 @@ defmodule UniversityVotingSystem.Users do
       when is_binary(email) and is_binary(password) do
     user = Repo.get_by(User, email: email)
     if User.valid_password?(user, password), do: user
+  end
+
+  def update_user(%User{} = user, attrs) do
+    user
+    |> User.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def check_if_user_has_voted_for_a_position(position_id, user_id) do
+    position_id = Integer.to_string(position_id)
+
+    Repo.all(User)
+    |> Enum.filter(fn user -> user.id == user_id end)
+    |> Enum.map(fn user -> user.positions_voted_for end)
+    |> Enum.at(0)
+    |> Map.has_key?(position_id)
   end
 
   @doc """

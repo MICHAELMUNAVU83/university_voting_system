@@ -21,6 +21,12 @@ defmodule UniversityVotingSystem.Votes do
     Repo.all(Vote)
   end
 
+  def get_vote_for_user_and_position(user, position) do
+    Repo.all(Vote)
+    |> Enum.filter(fn vote -> vote.user_id == user.id and vote.position_id == position.id end)
+    |> Enum.at(0)
+  end
+
   @doc """
   Gets a single vote.
 

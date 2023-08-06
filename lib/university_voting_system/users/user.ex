@@ -36,6 +36,11 @@ defmodule UniversityVotingSystem.Users.User do
     |> validate_password(opts)
   end
 
+  def changeset(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:email, :password, :positions_voted_for])
+  end
+
   defp validate_email(changeset) do
     changeset
     |> validate_required([:email])

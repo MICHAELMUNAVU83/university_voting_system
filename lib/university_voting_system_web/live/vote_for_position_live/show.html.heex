@@ -1,7 +1,22 @@
 <div>
   <%= @position.name %>
 
-  <%= for contestant <- @position.contestants do %>
-    <%= contestant.user_id %>
-  <% end %>
+  <%= if @user_voted_for_this_position == true do %>
+    <div class="bg-green-400 p-4">
+      You have voted for this position
+    </div>
+    <%end %>
+  <div class="flex flex-col gap-2">
+    <%= for contestant <- @position.contestants do %>
+      <div class="bg-blue-400 p-4">
+        <%= UniversityVotingSystem.Users.get_user_email(contestant.user_id) %>
+
+        <%= if @user_voted_for_this_position == false do %>
+          <%= link  to: "#", phx_click: "vote", phx_value_id: contestant.id, data: [confirm: "Are you sure?"] do %>
+            Vote
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
