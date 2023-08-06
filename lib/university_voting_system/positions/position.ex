@@ -6,6 +6,8 @@ defmodule UniversityVotingSystem.Positions.Position do
     field :name, :string
     field :description, :string
 
+    has_many :contestants, UniversityVotingSystem.Contestants.Contestant
+
     timestamps()
   end
 

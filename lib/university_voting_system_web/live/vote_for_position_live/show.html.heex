@@ -1,0 +1,7 @@
+<div>
+  <%= @position.name %>
+
+  <%= for contestant <- @position.contestants do %>
+    <%= contestant.user_id %>
+  <% end %>
+</div>

@@ -1,0 +1,15 @@
+<div>
+  bnkml
+  <%= for position <- @contested_positions do %>
+    <%= live_redirect to: Routes.vote_for_position_show_path(@socket , :show , position) do %>
+      <div class="bg-red-500">
+        <%= position.name %>
+        <p>
+          <%= UniversityVotingSystem.Positions.get_number_of_contestants_for_a_position(
+            position.id
+          ) %> Cotestants
+        </p>
+      </div>
+    <% end %>
+  <% end %>
+</div>

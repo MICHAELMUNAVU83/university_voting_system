@@ -35,7 +35,21 @@ defmodule UniversityVotingSystem.Positions do
       ** (Ecto.NoResultsError)
 
   """
-  def get_position!(id), do: Repo.get!(Position, id)
+  def get_position!(id), do: Repo.get!(Position, id) |> Repo.preload(:contestants)
+
+  def get_contestent_positions do
+    Repo.all(Position)
+    |> Repo.preload(:contestants)
+    |> Enum.filter(fn position -> length(position.contestants) > 0 end)
+  end
+
+  def get_number_of_contestants_for_a_position(id) do
+    Repo.all(Position)
+    |> Repo.preload(:contestants)
+    |> Enum.filter(fn position -> length(position.contestants) > 0 end)
+    |> Enum.map(fn position -> length(position.contestants) end)
+    |> Enum.at(0)
+  end
 
   @doc """
   Creates a position.
