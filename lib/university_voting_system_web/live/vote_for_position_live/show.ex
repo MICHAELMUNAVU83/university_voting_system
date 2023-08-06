@@ -5,8 +5,6 @@ defmodule UniversityVotingSystemWeb.VoteForPositionLive.Show do
   alias UniversityVotingSystem.Votes
 
   def mount(params, session, socket) do
-    IO.inspect(params)
-
     position_id = params["id"]
     current_user = Users.get_user_by_session_token(session["user_token"])
 
@@ -18,10 +16,20 @@ defmodule UniversityVotingSystemWeb.VoteForPositionLive.Show do
     user_vote_for_this_position =
       Votes.get_vote_for_user_and_position(current_user, position)
 
+    person_voted_for =
+      if user_vote_for_this_position != nil do
+        Users.get_user_email(user_vote_for_this_position.user_id)
+      else
+        nil
+      end
+
+    IO.inspect(person_voted_for)
+
     {:ok,
      socket
      |> assign(:position, position)
      |> assign(:user_voted_for_this_position, user_voted_for_this_position)
+     |> assign(:person_voted_for, person_voted_for)
      |> assign(:current_user, current_user)}
   end
 
@@ -52,11 +60,20 @@ defmodule UniversityVotingSystemWeb.VoteForPositionLive.Show do
     user_voted_for_this_position =
       Users.check_if_user_has_voted_for_a_position(position_id, current_user_id)
 
-    IO.inspect(user)
+    user_vote_for_this_position =
+      Votes.get_vote_for_user_and_position(user, socket.assigns.position)
+
+    person_voted_for =
+      if user_vote_for_this_position != nil do
+        Users.get_user_email(user_vote_for_this_position.user_id)
+      else
+        nil
+      end
 
     {:noreply,
      socket
      |> assign(:user_voted_for_this_position, user_voted_for_this_position)
+     |> assign(:person_voted_for, person_voted_for)
      |> assign(:current_user, user)}
   end
 end

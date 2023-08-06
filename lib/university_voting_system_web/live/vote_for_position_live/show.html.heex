@@ -1,11 +1,11 @@
 <div>
   <%= @position.name %>
 
-  <%= if @user_voted_for_this_position == true do %>
+  <%= if @user_voted_for_this_position == true  && @person_voted_for != nil do %>
     <div class="bg-green-400 p-4">
-      You have voted for this position
+      You have voted for this position <%= @person_voted_for %>
     </div>
-    <%end %>
+  <% end %>
   <div class="flex flex-col gap-2">
     <%= for contestant <- @position.contestants do %>
       <div class="bg-blue-400 p-4">
