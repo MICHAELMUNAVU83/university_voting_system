@@ -1,5 +1,16 @@
 <div>
+  Welcome to the home page
 
+  You can either vote or register as a candidate
+  <%= live_redirect  to: Routes.position_index_path(@socket , :index) do %>
+    <p>
+      Vote
+    </p>
+  <% end %>
 
-
+  <%= live_redirect  to: Routes.register_contestant_index_path(@socket , :index) do %>
+    <p>
+      Register as a candidate
+    </p>
+  <% end %>
 </div>
