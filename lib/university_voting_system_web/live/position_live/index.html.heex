@@ -29,13 +29,24 @@
         <td><%= position.description %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.position_show_path(@socket, :show, position) %></span>
-          <span><%= live_patch "Edit", to: Routes.position_index_path(@socket, :edit, position) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: position.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show", to: Routes.position_show_path(@socket, :show, position)) %>
+          </span>
+          <span>
+            <%= live_patch("Edit", to: Routes.position_index_path(@socket, :edit, position)) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: position.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Position", to: Routes.position_index_path(@socket, :new) %></span>
+<span><%= live_patch("New Position", to: Routes.position_index_path(@socket, :new)) %></span>

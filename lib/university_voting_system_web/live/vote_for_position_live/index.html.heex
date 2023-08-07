@@ -1,6 +1,16 @@
 <div>
   bnkml
   <%= for position <- @contested_positions do %>
+    <%= if UniversityVotingSystem.Votes.get_vote_for_user_and_position(@current_user, position) != nil do %>
+      <p>
+        You have voted for this position
+      </p>
+    <% else %>
+      <p>
+        You have not voted for this position
+      </p>
+    <% end %>
+
     <%= live_redirect to: Routes.vote_for_position_show_path(@socket , :show , position) do %>
       <div class="bg-red-500">
         <%= position.name %>

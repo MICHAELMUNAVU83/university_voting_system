@@ -35,13 +35,18 @@ defmodule UniversityVotingSystem.ContestantsTest do
       contestant = contestant_fixture()
       update_attrs = %{name: "some updated name"}
 
-      assert {:ok, %Contestant{} = contestant} = Contestants.update_contestant(contestant, update_attrs)
+      assert {:ok, %Contestant{} = contestant} =
+               Contestants.update_contestant(contestant, update_attrs)
+
       assert contestant.name == "some updated name"
     end
 
     test "update_contestant/2 with invalid data returns error changeset" do
       contestant = contestant_fixture()
-      assert {:error, %Ecto.Changeset{}} = Contestants.update_contestant(contestant, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Contestants.update_contestant(contestant, @invalid_attrs)
+
       assert contestant == Contestants.get_contestant!(contestant.id)
     end
 

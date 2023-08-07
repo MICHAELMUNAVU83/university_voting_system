@@ -24,16 +24,25 @@
   <tbody id="contestants">
     <%= for contestant <- @contestants do %>
       <tr id={"contestant-#{contestant.id}"}>
-      
-
         <td>
-          <span><%= live_redirect "Show", to: Routes.contestant_show_path(@socket, :show, contestant) %></span>
-          <span><%= live_patch "Edit", to: Routes.contestant_index_path(@socket, :edit, contestant) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: contestant.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show", to: Routes.contestant_show_path(@socket, :show, contestant)) %>
+          </span>
+          <span>
+            <%= live_patch("Edit", to: Routes.contestant_index_path(@socket, :edit, contestant)) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: contestant.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Contestant", to: Routes.contestant_index_path(@socket, :new) %></span>
+<span><%= live_patch("New Contestant", to: Routes.contestant_index_path(@socket, :new)) %></span>

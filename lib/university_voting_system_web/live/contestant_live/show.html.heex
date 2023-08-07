@@ -14,13 +14,16 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
     <%= @contestant.name %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.contestant_show_path(@socket, :edit, @contestant), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.contestant_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit",
+    to: Routes.contestant_show_path(@socket, :edit, @contestant),
+    class: "button"
+  ) %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.contestant_index_path(@socket, :index)) %></span>

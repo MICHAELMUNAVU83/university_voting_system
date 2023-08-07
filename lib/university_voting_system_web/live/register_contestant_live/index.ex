@@ -38,6 +38,14 @@ defmodule UniversityVotingSystemWeb.RegisterContestantLive.Index do
     IO.inspect(params)
     position_id = params["id"]
 
+    contestant_params = %{
+      "user_id" => socket.assigns.current_user.id,
+      "position_id" => position_id,
+      "approved" => false
+    }
+
+    {ok, _contestant} = Contestants.create_contestant(contestant_params)
+
     positions_user_has_contested_for =
       Contestants.get_positions_user_has_contested_for(socket.assigns.current_user.id)
 
@@ -54,14 +62,6 @@ defmodule UniversityVotingSystemWeb.RegisterContestantLive.Index do
       else
         ""
       end
-
-    contestant_params = %{
-      "user_id" => socket.assigns.current_user.id,
-      "position_id" => position_id,
-      "approved" => false
-    }
-
-    {ok, _contestant} = Contestants.create_contestant(contestant_params)
 
     {:noreply,
      socket

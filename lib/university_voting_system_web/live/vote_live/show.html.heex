@@ -14,13 +14,13 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
     <%= @vote.name %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.vote_show_path(@socket, :edit, @vote), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.vote_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.vote_show_path(@socket, :edit, @vote), class: "button") %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.vote_index_path(@socket, :index)) %></span>

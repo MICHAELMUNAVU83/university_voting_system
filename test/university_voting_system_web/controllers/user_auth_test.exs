@@ -10,7 +10,10 @@ defmodule UniversityVotingSystemWeb.UserAuthTest do
   setup %{conn: conn} do
     conn =
       conn
-      |> Map.replace!(:secret_key_base, UniversityVotingSystemWeb.Endpoint.config(:secret_key_base))
+      |> Map.replace!(
+        :secret_key_base,
+        UniversityVotingSystemWeb.Endpoint.config(:secret_key_base)
+      )
       |> init_test_session(%{})
 
     %{user: user_fixture(), conn: conn}
